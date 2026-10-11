@@ -40,6 +40,8 @@ parallel-compilation = ["yara-x/parallel-compilation"]
 # Cranelift JIT compiler. See the documentation in the `yara-x` core library for details.
 pulley = ["yara-x/pulley"]
 
+aot = ["yara-x/aot"]
+
 # Enables rules profiling.
 #
 # This feature is disabled by default.

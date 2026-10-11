@@ -311,6 +311,19 @@ enum YRX_RESULT yrx_compile(const char *src,
 // [wasmtime]: https://wasmtime.dev/
 void yrx_finalize(void);
 
+#if defined(YRX_AOT)
+// Serializes the rules and their native code as an AOT file.
+enum YRX_RESULT yrx_rules_serialize_aot(const struct YRX_RULES *rules,
+                                        struct YRX_BUFFER **buf);
+#endif
+
+#if defined(YRX_AOT)
+// Loads an AOT file without compiling anything. The file must be trusted
+// and must not change while the rules are alive.
+enum YRX_RESULT yrx_rules_deserialize_aot_file(const char *path,
+                                               struct YRX_RULES **rules);
+#endif
+
 // Creates a [`YRX_COMPILER`] object.
 enum YRX_RESULT yrx_compiler_create(uint32_t flags,
                                     struct YRX_COMPILER **compiler);

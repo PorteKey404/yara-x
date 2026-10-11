@@ -106,6 +106,8 @@ pub use rule::*;
 pub use rules::*;
 pub use scanner::*;
 
+#[cfg(feature = "aot")]
+mod aot;
 mod compiler;
 mod metadata;
 mod pattern;
