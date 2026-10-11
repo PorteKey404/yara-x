@@ -1,3 +1,5 @@
+#[cfg(feature = "aot")]
+mod aot;
 mod check;
 mod compile;
 #[cfg(feature = "debug-cmd")]
