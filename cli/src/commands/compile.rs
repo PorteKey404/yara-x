@@ -14,6 +14,7 @@ use crate::config::Config;
 pub fn compile() -> Command {
     super::command("compile")
         .about("Compile rules to binary form")
+        .args(super::aot::compile_arg())
         .arg(
             Arg::new("[NAMESPACE:]RULES_PATH")
                 .required(true)
@@ -40,7 +41,7 @@ pub fn exec_compile(args: &ArgMatches, config: &Config) -> anyhow::Result<()> {
         format!("can not write `{}`", output_path.display())
     })?;
 
-    rules.serialize_into(&output_file)?;
+    super::aot::serialize(&rules, args, &output_file)?;
 
     // With `--ignore-invalid-rules` the valid rules are still written, but exit
     // with an error listing the ignored rules and reasons.

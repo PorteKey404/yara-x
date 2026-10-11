@@ -57,6 +57,8 @@ native-code-serialization = ["yara-x/native-code-serialization"]
 # Cranelift JIT compiler. See the documentation in the `yara-x` core library for details.
 pulley = ["yara-x/pulley"]
 
+aot = ["yara-x/aot"]
+
 [dependencies]
 anyhow = { workspace = true }
 ascii_tree = { workspace = true }

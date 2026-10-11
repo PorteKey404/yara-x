@@ -1,3 +1,4 @@
+mod aot;
 mod check;
 mod compile;
 mod completion;

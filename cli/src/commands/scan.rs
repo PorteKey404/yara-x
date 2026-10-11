@@ -42,6 +42,7 @@ pub fn scan() -> Command {
     super::command("scan")
         .about("Scan a file or directory")
         .long_about(help::SCAN_LONG_HELP)
+        .args(super::aot::scan_arg())
         .arg(
             Arg::new("[NAMESPACE:]RULES_PATH")
                 .required(true)
@@ -256,7 +257,7 @@ pub fn exec_scan(args: &ArgMatches, config: &Config) -> anyhow::Result<()> {
         let file = File::open(rules_path)
             .with_context(|| format!("can not open {:?}", rules_path))?;
 
-        let rules = Rules::deserialize_from(file)?;
+        let rules: Rules = super::aot::deserialize(args, rules_path, file)?;
 
         // If the user is defining external variables, make sure that these
         // variables are valid. A scanner is created only with the purpose
