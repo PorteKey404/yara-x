@@ -21,6 +21,9 @@ pub(crate) type AotFile = Option<memmap2::Mmap>;
 #[cfg(feature = "aot")]
 pub(crate) use imp::configure;
 
+#[cfg(all(test, feature = "aot"))]
+mod tests;
+
 #[cfg(feature = "aot")]
 mod imp {
     use std::fs::File;
