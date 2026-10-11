@@ -115,6 +115,8 @@ protoc = []
 # This feature is disabled by default.
 native-code-serialization = []
 
+aot = ["dep:libc"]
+
 # Enables parallel compilation of WASM code. When compiling large number of
 # rules this noticeable reduces compilation time. However, this creates new
 # threads, which can be problematic in some scenarios. See:
@@ -341,6 +343,7 @@ encoding_rs = { workspace = true, optional = true }
 env_logger = { workspace = true, optional = true }
 flate2 = { workspace = true, optional = true }
 memmap2 = { workspace = true }
+libc = { version = "0.2", optional = true }
 indexmap = { workspace = true, features = ["serde"] }
 intaglio = { workspace = true }
 inventory = { workspace = true }

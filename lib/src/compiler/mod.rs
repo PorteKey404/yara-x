@@ -67,6 +67,7 @@ pub use crate::compiler::rules::*;
 #[doc(inline)]
 pub use crate::compiler::warnings::*;
 
+pub(crate) mod aot;
 mod atoms;
 mod context;
 mod emit;
@@ -898,6 +899,8 @@ impl<'a> Compiler<'a> {
                     compiled_regexp_sets: Vec::new(),
                     fast_scan_max_matches: this.fast_scan_max_matches,
                     rules_profiling_enabled: cfg!(feature = "rules-profiling"),
+                    #[cfg(feature = "aot")]
+                    _aot_file: Default::default(),
                 },
                 this.wasm_mod,
             )

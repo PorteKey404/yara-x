@@ -14,7 +14,7 @@ pub(crate) use wasmtime::{
 };
 
 #[derive(Clone)]
-pub(crate) struct Module(wasmtime::Module);
+pub(crate) struct Module(pub(crate) wasmtime::Module);
 
 impl Module {
     pub fn from_binary(

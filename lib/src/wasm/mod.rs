@@ -773,6 +773,8 @@ pub(crate) struct WasmSymbols {
 
 pub(crate) static CONFIG: LazyLock<Config> = LazyLock::new(|| {
     let mut config = Config::default();
+    #[cfg(feature = "aot")]
+    crate::compiler::aot::configure(&mut config);
     // Wasmtime produces a nasty warning when linked against musl. The
     // warning can be fixed by disabling native unwind information.
     //

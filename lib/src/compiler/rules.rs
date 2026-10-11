@@ -154,6 +154,10 @@ pub struct Rules {
         deserialize_with = "deserialize_wasm_mod"
     )]
     pub(in crate::compiler) compiled_wasm_mod: Option<wasm::runtime::Module>,
+    /// Freed just after `compiled_wasm_mod`.
+    #[serde(skip)]
+    #[cfg(feature = "aot")]
+    pub(in crate::compiler) _aot_file: super::aot::AotFile,
 
     /// Vector with the names of all the imported modules. The vector contains
     /// the [`IdentId`] corresponding to the module's identifier.
@@ -385,7 +389,7 @@ impl Rules {
         //
         // In both cases we try to build the module again from the data in
         // `rules.wasm_mode`.
-        if rules.compiled_wasm_mod.is_none() {
+        if rules.compiled_wasm_mod.is_none() && !super::aot::loading() {
             #[cfg(feature = "logging")]
             let start = Instant::now();
 
@@ -878,6 +882,7 @@ where
     D: Deserializer<'de>,
 {
     let bytes: Option<&[u8]> = Deserialize::deserialize(deserializer)?;
+    let bytes = bytes.filter(|_| !super::aot::loading());
     let module = if let Some(bytes) = bytes {
         wasm::runtime::Module::deserialize(wasm::get_engine(), bytes).ok()
     } else {
