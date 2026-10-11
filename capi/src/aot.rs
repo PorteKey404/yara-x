@@ -64,3 +64,5 @@ pub unsafe extern "C" fn yrx_rules_deserialize_aot_file(
     }
 }
 
+#[cfg(test)]
+mod tests;
