@@ -1,0 +1,7 @@
+bin
+build
+Makefile
+CMakeFiles
+patches
+cmake_install.cmake
+ISSUES.md
